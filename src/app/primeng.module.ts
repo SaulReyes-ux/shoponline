@@ -8,7 +8,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { MenuModule } from 'primeng/menu';
 import { CardModule } from 'primeng/card';
 import { InputTextModule} from 'primeng/inputtext';
-
+import { ToastModule} from 'primeng/toast';
 const modPrime: any = [
   AvatarModule,
   ButtonModule,
@@ -18,7 +18,8 @@ const modPrime: any = [
   MenuModule,
   CardModule,
   InputTextModule,
-  ButtonModule
+  ButtonModule,
+  ToastModule
 ];
 
 @NgModule({
