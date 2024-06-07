@@ -5,7 +5,7 @@ import { AuthService } from '../../servicios/auth.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { User } from '../../interfaces/auth';
-import { response } from 'express';
+
 
 @Component({
   selector: 'app-register',
