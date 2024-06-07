@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { passwordMatchValidator } from '../../shared/password-match.directives';
+import { AuthService } from '../../servicios/auth.service';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+import { User } from '../../interfaces/auth';
+import { response } from 'express';
 
 @Component({
   selector: 'app-register',
@@ -9,14 +15,20 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class RegisterComponent {
 
   registerForm= this.fb.group({
-    fullName: ['',[Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)]],
+    fullName: ['',Validators.required],
     email: ['',[Validators.required,Validators.email]],
-    password:['', Validators.required],
+    password:['', [Validators.required,Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)] ],
     confirmPassword: ['', Validators.required]
-  })
+  },
+{
+  validators: passwordMatchValidator
+})
 
-  constructor(private fb:FormBuilder){
-
+  constructor(private fb:FormBuilder, private authService:AuthService,
+    private router:Router, private messageService:MessageService
+    
+  ){
+    
   }
 
   get fullName(){
@@ -36,5 +48,20 @@ export class RegisterComponent {
     return this.registerForm.controls['confirmPassword'];
   }
 
+  enviarRegistro(){
+    const data = {...this.registerForm.value};
+
+    delete data.confirmPassword;
+
+    this.authService.registerUser(data as User).subscribe(
+      response => {
+        console.log(response)
+        this.messageService.add({severity: 'success', summary:'Success',
+          detail: 'Registrado Agregado'
+        });
+        this.router.navigate(['login']);
+      }
+    )
+  }
 
 }
