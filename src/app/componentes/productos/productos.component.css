@@ -1,0 +1,87 @@
+/* Ajusta el ancho del diálogo */
+.p-dialog {
+    width: 450px !important;
+}
+
+/* Añade un poco de espacio en el contenido del diálogo */
+.p-fluid {
+    padding: 20px;
+}
+
+/* Estilo de los campos de entrada */
+.p-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.p-field input[type="text"],
+.p-field input[type="number"],
+.p-field .p-dropdown {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.p-field input[type="text"]:focus,
+.p-field input[type="number"]:focus,
+.p-field .p-dropdown:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo de los mensajes de error */
+.p-field .p-error {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Ajuste de la alineación de los botones del pie */
+.p-dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+/* Estilo de los botones */
+.p-dialog-footer .p-button {
+    min-width: 100px;
+}
+
+.p-dialog-footer .p-button-text {
+    color: #dc3545;
+}
+
+.p-dialog-footer .p-button-text:hover {
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.p-dialog-footer .p-button-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.p-dialog-footer .p-button-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Estilo de la cabecera del diálogo */
+.p-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.p-dialog-header span {
+    font-size: 18px;
+    font-weight: bold;
+}

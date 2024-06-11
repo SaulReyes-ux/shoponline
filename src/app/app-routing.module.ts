@@ -5,6 +5,7 @@ import { RegisterComponent } from './componentes/register/register.component';
 import { ProductoListaComponent } from './componentes/producto-lista/producto-lista.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { authGuard } from './guardias/auth.guard';
+import { ProductosComponent } from './componentes/productos/productos.component';
 const routes: Routes = [
   {
     path:'login',
@@ -13,6 +14,9 @@ const routes: Routes = [
   {
     path:'register',
     component: RegisterComponent
+  },{
+    path:'productos',
+    component: ProductosComponent
   },
   {
     path:'',
