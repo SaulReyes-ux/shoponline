@@ -1,0 +1,101 @@
+<p-dialog></p-dialog>
+<p-confirmDialog></p-confirmDialog>
+<div class="card">
+    <p-toast></p-toast>
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <p-button pRipple severity="success" label="New" icon="pi pi-plus" class="mr-2"
+                (click)="openNew()"></p-button>
+            <p-button pRipple severity="danger" label="Delete" icon="pi pi-trash" (click)="deleteSelectedProducts()"
+                [disabled]="!selectedProducts || !selectedProducts.length"></p-button>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import"
+                class="mr-2 inline-block"></p-fileUpload>
+            <p-button pRipple severity="help" label="Export" icon="pi pi-upload"></p-button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="products" [rows]="10" [paginator]="true"
+    [globalFilterFields]="['nombre', 'categoria', 'estadoInventario']" 
+    [tableStyle]="{'min-width': '75rem'}" [(selection)]="selectedProducts" 
+    [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+    [showCurrentPageReport]="true">
+    
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td><p-tableCheckbox [value]="product"></p-tableCheckbox></td>
+        <td>{{ product.nombre }}</td>
+        <td><img [src]="product.imagen" alt="{{ product.nombre }}" width="50"></td>
+        <td>{{ product.precio }}</td>
+        <td>{{ product.categoria }}</td>
+        <td>{{ product.rating }}</td>
+        <td>{{ product.estadoInventario }}</td>
+        <td>
+          <p-button icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></p-button>
+          <p-button icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteProduct(product)"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  
+
+
+</div>
+
+
+
+
+    <p-dialog [(visible)]="productDialog" modal="true" [style]="{width: '450px'}" header="Detalles del Producto"
+        [closable]="false" [resizable]="false">
+        <ng-template pTemplate="header">
+            <span>Detalles del Producto</span>
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" type="text" pInputText [(ngModel)]="product.nombre" required autofocus />
+                    <small *ngIf="submitted && !product.nombre" class="p-error">El nombre es requerido.</small>
+                </div>
+                
+                <div class="p-field">
+                    <label for="descripcion">Descripción</label>
+                    <input id="descripcion" type="text" pInputText [(ngModel)]="product.descripcion" />
+                </div>
+                <div class="p-field">
+                    <label for="precio">Precio</label>
+                    <input id="precio" type="number" pInputNumber [(ngModel)]="product.precio" />
+                </div>
+                <div class="p-field">
+                    <label for="categoria">Categoría</label>
+                    <input id="categoria" type="text" pInputText [(ngModel)]="product.categoria" />
+                </div>
+                <div class="p-field">
+                    <label for="cantidad">Cantidad</label>
+                    <input id="cantidad" type="number" pInputNumber [(ngModel)]="product.cantidad" />
+                </div>
+                <div class="p-field">
+                    <label for="estadoInventario">Estado</label>
+                    <p-dropdown [options]="statuses" [(ngModel)]="product.estadoInventario"
+                        placeholder="Seleccionar Estado"></p-dropdown>
+                </div>
+                
+                <div class="p-field">
+                    <label for="rating">Calificación</label>
+                    <p-rating [(ngModel)]="product.rating"></p-rating>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <p-button label="Cancelar" icon="pi pi-times" (click)="hideDialog()" class="p-button-text"></p-button>
+            <p-button label="Guardar" icon="pi pi-check" (click)="saveProduct()"></p-button>
+        </ng-template>
+    </p-dialog>
+
+
+
+
+
+
+
